@@ -78,7 +78,7 @@ func main() {
 		})
 	})
 
-	r.GET("/get-url/:hash", func(c *gin.Context) {
+	r.GET("/:hash", func(c *gin.Context) {
 		hash := c.Param("hash")
 
 		query := "SELECT url FROM short_url WHERE hash = ?"

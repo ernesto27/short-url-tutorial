@@ -16,13 +16,14 @@ services:
     image: mysql:8
     environment:
       MYSQL_ROOT_PASSWORD: 1111
+      MYSQL_DATABASE: short-url
     volumes:
       - dbdata:/var/lib/mysql
     ports:
       - "3306:3306"
     restart: always
 
-  nginx-short-url:
+  nginx:
     image: nginx
     depends_on:
       - backend
