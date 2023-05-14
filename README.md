@@ -15,6 +15,16 @@ Clone the repository
 $ git clone git@github.com:yourrepo.git
 ```
 
+Install docker
+
+```bash
+$ ./docker.sh
+```
+Response yes if prompt appears.
+After scirpt finish, logout and login again on the server.
+
+
+
 ### Setup Mysql 
 
 Go to the repo folder and run this command 
