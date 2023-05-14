@@ -16,13 +16,22 @@ type BodyParams struct {
 }
 
 func main() {
-	db, err := sql.Open("mysql", "root:1111@/short-url")
+	user := "root"
+	password := "1111"
+	host := "mysql"
+	port := "3306"
+	database := "short-url"
+
+	db, err := sql.Open("mysql", user+":"+password+"@tcp("+host+":"+port+")/"+database)
+
 	if err != nil {
+		fmt.Println("Error: " + err.Error())
 		panic(err)
 	}
 
 	err = db.Ping()
 	if err != nil {
+		fmt.Println("Error ping: " + err.Error())
 		panic(err)
 	}
 
