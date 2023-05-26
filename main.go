@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
 	"shorturl/db"
 
 	"github.com/gin-gonic/gin"
@@ -14,59 +12,31 @@ type BodyParams struct {
 }
 
 func main() {
-	// TODO : Move to env
-	user := "root"
-	password := "1111"
-	host := "mysql"
-	port := "3306"
-	database := "short-url"
-
-	myDB, err := db.NewMysql(host, user, password, port, database)
+	myDB, err := getDB()
 	if err != nil {
 		panic(err)
 	}
 
 	defer myDB.Close()
-
 	r := gin.Default()
 	r.POST("/create-url", func(c *gin.Context) {
-		// TODO: Validation data
-		var bodyParams BodyParams
-		if err := c.ShouldBindJSON(&bodyParams); err != nil {
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": "error parsing body json",
-			})
-			return
-		}
-
-		hash, err := myDB.CreateShortURL(bodyParams.Url)
-		if err != nil {
-			fmt.Println(err)
-			c.JSON(http.StatusInternalServerError, gin.H{
-				"message": "error inserting url",
-			})
-			return
-		}
-		c.JSON(http.StatusOK, gin.H{
-			"message": "short url created http://localhost/" + hash,
-		})
+		CreateUrl(c, myDB)
 	})
 
 	r.GET("/:hash", func(c *gin.Context) {
-		hash := c.Param("hash")
-		url, err := myDB.GetShortURL(hash)
-		if err != nil {
-			fmt.Println(err)
-			c.JSON(http.StatusNotFound, gin.H{
-				"message": "Not found url",
-			})
-			return
-		}
-
-		c.JSON(http.StatusOK, gin.H{
-			"message": url,
-		})
+		GetURL(c, myDB)
 	})
 
 	r.Run()
+}
+
+func getDB() (*db.Mysql, error) {
+	user := "root"
+	password := "1111"
+	// host := "mysql"
+	host := "localhost"
+	port := "3306"
+	database := "short-url"
+
+	return db.NewMysql(host, user, password, port, database)
 }

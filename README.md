@@ -29,7 +29,7 @@ After scirpt finish, logout and login again on the server.
 
 Go to the repo folder and run this command 
 ```bash
-$ docker compose up mysql -d 
+$ docker compose up -d mysql 
 ```
 
 Create tables 
