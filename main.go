@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"shorturl/db"
 
 	"github.com/gin-gonic/gin"
@@ -33,8 +34,12 @@ func main() {
 func getDB() (*db.Mysql, error) {
 	user := "root"
 	password := "1111"
-	// host := "mysql"
+
 	host := "localhost"
+	if os.Getenv("DB_HOST") != "" {
+		host = os.Getenv("DB_HOST")
+	}
+
 	port := "3306"
 	database := "short-url"
 
