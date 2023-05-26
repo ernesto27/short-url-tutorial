@@ -20,12 +20,6 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Initialize MySQL
-        run: |
-          sudo apt-get -yqq update
-          sudo apt-get -yqq install mysql-client
-          mysql -h localhost -u root -p1111 short-url < init.sql
 
       - name: Set up Go
         uses: actions/setup-go@v4

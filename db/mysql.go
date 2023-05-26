@@ -9,7 +9,7 @@ import (
 )
 
 type Mysql struct {
-	db *sql.DB
+	Db *sql.DB
 }
 
 func NewMysql(host, user, password, port, database string) (*Mysql, error) {
@@ -25,13 +25,13 @@ func NewMysql(host, user, password, port, database string) (*Mysql, error) {
 	}
 
 	return &Mysql{
-		db: db,
+		Db: db,
 	}, nil
 }
 
 func (m *Mysql) CreateShortURL(url string) (string, error) {
 	query := "INSERT INTO short_url (hash, url) VALUES (?, ?)"
-	stmt, err := m.db.Prepare(query)
+	stmt, err := m.Db.Prepare(query)
 	if err != nil {
 		return "", err
 	}
@@ -52,7 +52,7 @@ func (m *Mysql) CreateShortURL(url string) (string, error) {
 
 func (m *Mysql) GetShortURL(hash string) (string, error) {
 	query := "SELECT url FROM short_url WHERE hash = ?"
-	stmt, err := m.db.Prepare(query)
+	stmt, err := m.Db.Prepare(query)
 	if err != nil {
 		return "", err
 	}
@@ -68,5 +68,5 @@ func (m *Mysql) GetShortURL(hash string) (string, error) {
 }
 
 func (m *Mysql) Close() {
-	m.db.Close()
+	m.Db.Close()
 }
