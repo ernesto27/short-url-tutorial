@@ -34,14 +34,14 @@ $ docker compose up mysql -d
 
 Create tables 
 ```bash
-$ docker exec -i shorturl-mysql-1 mysql -uroot -p1111 < ./init.sql
+$ docker exec -i mysql-short-url mysql -uroot -p1111 < ./init.sql
 ```
 
 ### Init backend, nginx
 
 Run this command to init backend and nginx on background
 ```bash
-$ docker compose up backend nginx up -d
+$ docker compose up -d backend nginx
 ```
 
 ### Backup db 
