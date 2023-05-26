@@ -2,7 +2,7 @@ version: "3"
 
 services:
   backend:
-    image: ernesto27/short-url:v0.0.4
+    image: ernesto27/short-url:v0.0.6
     container_name: backend-short-url
     depends_on:
       - mysql
