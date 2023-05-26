@@ -23,8 +23,8 @@ jobs:
       
       - name: Initialize MySQL
         run: |
-          apt-get -yqq update
-          apt-get -yqq install mysql-client
+          sudo apt-get -yqq update
+          sudo apt-get -yqq install mysql-client
           mysql -h localhost -u root -p1111 short-url < init.sql
 
       - name: Set up Go
