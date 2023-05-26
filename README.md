@@ -44,6 +44,16 @@ Run this command to init backend and nginx on background
 $ docker compose up backend nginx up -d
 ```
 
+### Backup db 
+```bash
+$ docker exec mysql-short-url mysqldump -uroot -p1111 short-url > bkp.sql
+```
+
+### Import dump sql 
+```bash
+$ docker exec -i mysql-short-url mysql -uroot -p1111 short-url < bkp.sql
+```
+
 ### Test endpoints
 
 Create a short url

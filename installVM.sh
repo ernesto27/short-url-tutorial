@@ -1,3 +1,5 @@
+#bin/bash
+
 yes | sudo apt update
 
 yes | sudo apt install apt-transport-https ca-certificates curl software-properties-common
@@ -14,3 +16,7 @@ yes | sudo usermod -aG docker ${USER}
 
 
 echo "Logout and login again on server to use docker without sudo"
+
+
+# Add cron job to backup mysql database every minute on $HOME folder
+crontab -l | { cat; echo "* * * * * ~/code/projects/shorturl/backupDb.sh"; } | crontab -
