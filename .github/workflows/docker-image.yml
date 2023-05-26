@@ -48,7 +48,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          script: ls
+          script: cd short-url-tutorial/ && git pull &&  docker compose up -d backend
           
           
           
