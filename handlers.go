@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"shorturl/cache"
 	"shorturl/db"
 
 	"github.com/gin-gonic/gin"
@@ -31,15 +32,34 @@ func CreateUrl(c *gin.Context, myDB *db.Mysql) {
 	})
 }
 
-func GetURL(c *gin.Context, myDB *db.Mysql) {
+func GetURL(c *gin.Context, myDB *db.Mysql, myCache *cache.Redis) {
 	hash := c.Param("hash")
-	url, err := myDB.GetShortURL(hash)
+
+	// Check in cache
+	url, err := myCache.Get(hash)
+	if err == nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println("cache url: ", url)
+
+	// Not found in cache
+	if url == "" {
+		fmt.Println("not found in cache, go to DB")
+		url, err = myDB.GetShortURL(hash)
+		if err != nil {
+			fmt.Println(err)
+			c.JSON(http.StatusNotFound, gin.H{
+				"message": "Not found url",
+			})
+			return
+		}
+	}
+
+	// Set in cache
+	err = myCache.Set(hash, url)
 	if err != nil {
 		fmt.Println(err)
-		c.JSON(http.StatusNotFound, gin.H{
-			"message": "Not found url",
-		})
-		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{

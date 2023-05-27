@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"shorturl/cache"
 	"shorturl/db"
 
 	"github.com/gin-gonic/gin"
@@ -17,8 +18,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-
 	defer myDB.Close()
+
+	myCache := getCache()
+
 	r := gin.Default()
 
 	r.GET("/", func(c *gin.Context) {
@@ -32,7 +35,7 @@ func main() {
 	})
 
 	r.GET("/:hash", func(c *gin.Context) {
-		GetURL(c, myDB)
+		GetURL(c, myDB, myCache)
 	})
 
 	r.Run()
@@ -51,4 +54,13 @@ func getDB() (*db.Mysql, error) {
 	database := "short-url"
 
 	return db.NewMysql(host, user, password, port, database)
+}
+
+func getCache() *cache.Redis {
+	host := "localhost"
+	if os.Getenv("REDIS_HOST") != "" {
+		host = os.Getenv("REDIS_HOST")
+	}
+
+	return cache.NewRedis(host)
 }
