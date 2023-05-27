@@ -2,11 +2,12 @@ version: "3"
 
 services:
   backend:
-    image: ernesto27/short-url:v0.0.6
+    image: ernesto27/short-url:v0.0.7
     container_name: backend-short-url
     depends_on:
       - mysql
     environment:
+      VERSION: v0.0.7
       DB_HOST: mysql
     command: ./myapp
     ports:

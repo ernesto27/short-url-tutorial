@@ -20,6 +20,13 @@ func main() {
 
 	defer myDB.Close()
 	r := gin.Default()
+
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"version": os.Getenv("VERSION"),
+		})
+	})
+
 	r.POST("/create-url", func(c *gin.Context) {
 		CreateUrl(c, myDB)
 	})

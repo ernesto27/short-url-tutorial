@@ -10,7 +10,8 @@ services:
       dockerfile: docker/Dockerfile
     command: ./myapp
     environment:
-      - DB_HOST=mysql
+      VERSION: ${VERSION}
+      DB_HOST: mysql
     ports:
       - "8080:8080"
     restart: always
