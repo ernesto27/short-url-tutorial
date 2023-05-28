@@ -2,7 +2,6 @@ version: "3"
 
 services:
   backend:
-    container_name: backend-short-url
     depends_on:
       - mysql
       - redis
@@ -14,8 +13,8 @@ services:
       VERSION: v0.0.1
       DB_HOST: mysql
       REDIS_HOST: redis
-    ports:
-      - "8080:8080"
+    deploy:
+      replicas: 3
     restart: always
 
   mysql:
