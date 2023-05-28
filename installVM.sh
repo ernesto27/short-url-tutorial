@@ -19,4 +19,4 @@ echo "Logout and login again on server to use docker without sudo"
 
 
 # Add cron job to backup mysql database every minute on $HOME folder
-crontab -l | { cat; echo "* * * * * ~/code/projects/shorturl/backupDb.sh"; } | crontab -
+crontab -l | { cat; echo "* * * * * ~yourrepofolder/shorturl/backupDb.sh"; } | crontab -
