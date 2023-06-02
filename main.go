@@ -1,12 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"shorturl/cache"
 	"shorturl/db"
 
 	"github.com/gin-gonic/gin"
-	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
 )
 
 type BodyParams struct {
@@ -14,6 +15,12 @@ type BodyParams struct {
 }
 
 func main() {
+
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
+
 	myDB, err := getDB()
 	if err != nil {
 		panic(err)
@@ -42,18 +49,7 @@ func main() {
 }
 
 func getDB() (*db.Mysql, error) {
-	user := "root"
-	password := "1111"
-
-	host := "localhost"
-	if os.Getenv("DB_HOST") != "" {
-		host = os.Getenv("DB_HOST")
-	}
-
-	port := "3306"
-	database := "short-url"
-
-	return db.NewMysql(host, user, password, port, database)
+	return db.NewMysql(os.Getenv("DB_HOST"), os.Getenv("DB_USERNAME"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_PORT"), os.Getenv("DB_DATABASE"))
 }
 
 func getCache() *cache.Redis {

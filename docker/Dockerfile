@@ -18,7 +18,8 @@ FROM gcr.io/distroless/base-debian11 AS build-release-stage
 
 WORKDIR /
 
-COPY --from=build-stage /short-url /short-url
+COPY --from=build-stage /short-url /short-url 
+COPY --from=build-stage /app/.env /.env 
 
 EXPOSE 8080
 

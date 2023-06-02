@@ -6,6 +6,8 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Mysql struct {
@@ -13,7 +15,9 @@ type Mysql struct {
 }
 
 func NewMysql(host, user, password, port, database string) (*Mysql, error) {
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", user, password, host, port, database))
+	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s?tls=true", user, password, host, database)
+
+	db, err := sql.Open("mysql", dns)
 	if err != nil {
 		return nil, err
 	}

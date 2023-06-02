@@ -78,7 +78,7 @@ Init backend, nginx
 
 Run this command to init backend, redis and nginx on background
 ```bash
-$ docker compose up -d backend nginx redis 
+$ docker compose -f docker-compose-dev.yaml up -d backend nginx redis 
 ```
 
 ### Backup db 
