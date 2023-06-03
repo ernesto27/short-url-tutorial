@@ -1,23 +1,6 @@
 version: "3"
 
 services:
-  backend:
-    container_name: backend-short-url
-    depends_on:
-      - mysql
-      - redis
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-    command: ./myapp
-    environment:
-      VERSION: v0.0.1
-      DB_HOST: mysql
-      REDIS_HOST: redis
-    ports:
-      - "8080:8080"
-    restart: always
-
   mysql:
     image: mysql:8
     container_name: mysql-short-url
@@ -30,16 +13,6 @@ services:
       - "3306:3306"
     restart: always
 
-  nginx:
-    image: nginx
-    container_name: nginx-short-url
-    depends_on:
-      - backend
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    restart: always
 
   redis:
     image: redis:7.0.11

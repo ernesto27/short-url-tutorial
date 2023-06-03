@@ -53,10 +53,5 @@ func getDB() (*db.Mysql, error) {
 }
 
 func getCache() *cache.Redis {
-	host := "localhost"
-	if os.Getenv("REDIS_HOST") != "" {
-		host = os.Getenv("REDIS_HOST")
-	}
-
-	return cache.NewRedis(host)
+	return cache.NewRedis(os.Getenv("CACHE_HOST"), os.Getenv("CACHE_PASSWORD"), os.Getenv("CACHE_PORT"))
 }
