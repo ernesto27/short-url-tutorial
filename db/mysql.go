@@ -15,7 +15,13 @@ type Mysql struct {
 }
 
 func NewMysql(host, user, password, port, database string) (*Mysql, error) {
-	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s?tls=true", user, password, host, database)
+	tls := "?tls=true"
+	if host == "localhost" {
+		tls = ""
+	}
+
+	dns := fmt.Sprintf("%s:%s@tcp(%s)/%s%s", user, password, host, database, tls)
+	fmt.Println("DNS", dns)
 
 	db, err := sql.Open("mysql", dns)
 	if err != nil {
