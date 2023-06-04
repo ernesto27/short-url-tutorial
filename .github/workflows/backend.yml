@@ -34,9 +34,9 @@ jobs:
 
       - name: Test
         run: |
-          DB_HOST=localhost
-          DB_USERNAME=root
-          DB_PASSWORD=1111
-          DB_DATABASE=short-url
-          DB_PORT=3306
+          export DB_HOST=localhost
+          export DB_USERNAME=root
+          export DB_PASSWORD=1111
+          export DB_DATABASE=short-url
+          export DB_PORT=3306
           go test -v ./...
