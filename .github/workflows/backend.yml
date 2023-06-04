@@ -33,4 +33,10 @@ jobs:
           staticcheck ./...
 
       - name: Test
-        run: echo "${{ vars.ENV }}" > .env && cat .env && go test -v ./...
+        run: |
+          DB_HOST=localhost
+          DB_USERNAME=root
+          DB_PASSWORD=1111
+          DB_DATABASE=short-url
+          DB_PORT=3306
+          go test -v ./...
