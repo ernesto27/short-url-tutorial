@@ -33,7 +33,7 @@ func main() {
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"version": os.Getenv("VERSION"),
+			"version from githubactions": os.Getenv("VERSION"),
 		})
 	})
 
