@@ -82,6 +82,14 @@ Get short url
 ```bash
 $ curl -X GET http://localhost:8080/hash-url
 ```
+--- 
+
+## Deploy to azure web services using azure cli
+You need to install azure cli and login to your account before run this command.
+```bash
+$ ./scripts/deployAzure.sh
+```
+
 
 
 
