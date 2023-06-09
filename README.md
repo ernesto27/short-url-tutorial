@@ -68,7 +68,15 @@ Run this command to init backend, redis and nginx on background
 ```bash
 $ docker compose -f docker-compose-dev.yaml up -d redis 
 ```
+Create .env file and set values
+```bash
+$ cp .env-example .env
+```
 
+Init backend
+```bash
+$ go run .
+```
 
 --- 
 ### Test endpoints
