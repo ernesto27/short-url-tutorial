@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: short-url-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: short-url-backend
+  template:
+    metadata:
+      labels:
+        app: short-url-backend
+    spec:
+      containers:
+      - name: short-url-backend
+        image: ernesto27/short-url:v2.0.0
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: short-url-backend
+spec:
+  type: LoadBalancer
+  selector:
+    app: short-url-backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
