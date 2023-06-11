@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: short-url-backend
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: short-url-backend
@@ -14,7 +14,10 @@ spec:
     spec:
       containers:
       - name: short-url-backend
-        image: ernesto27/short-url:v2.0.0
+        image: ernesto27/short-url:v2.0.1
+        envFrom:
+        - configMapRef:
+            name: config-short-url  
         ports:
         - containerPort: 8080
 ---

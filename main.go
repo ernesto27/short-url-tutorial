@@ -24,6 +24,7 @@ func main() {
 	myDB, err := getDB()
 	if err != nil {
 		fmt.Println(err)
+		panic(err)
 	}
 	defer myDB.Close()
 
@@ -33,7 +34,7 @@ func main() {
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
-			"version kubernetes": os.Getenv("VERSION"),
+			"version kubernetes": os.Getenv("HOSTNAME"),
 		})
 	})
 

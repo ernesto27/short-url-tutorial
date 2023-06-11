@@ -73,9 +73,36 @@ Create .env file and set values
 $ cp .env-example .env
 ```
 
-Init backend
+Init kubernetes minkube 
+
+Start minikube
 ```bash
-$ go run .
+$ minikube start
+```
+
+Create alias for kubectl
+```bash
+$ alias kubectl="minikube kubectl --"
+```
+
+Create deployment, load balancer service 
+```bash
+$ k apply -f kubernetes/deployment.yaml
+```
+
+Get pods running 
+```bash
+$ k get pods
+```
+
+Tunnel to localhost
+```bash
+minikube tunnel
+``` 
+
+Get service IP
+```bash
+$ k get service
 ```
 
 --- 
