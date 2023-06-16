@@ -88,8 +88,21 @@ $ minikube start
 
 Create alias for kubectl
 ```bash
-$ alias kubectl="minikube kubectl --"
+$ alias k="minikube kubectl --"
 ```
+
+Create config secret file.
+```bash
+$ cp kubernetes/config-secret-example.yaml kubernetes/config-secret.yaml
+```
+
+Update environment values on config-secret.yaml file.
+
+Apply config secret file.
+```bash
+$ k apply -f kubernetes/config-secret.yaml
+```
+
 
 Create deployment, load balancer service 
 ```bash
