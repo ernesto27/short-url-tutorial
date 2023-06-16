@@ -75,6 +75,12 @@ $ cp .env-example .env
 
 Init kubernetes minkube 
 
+
+Install instructions 
+
+https://minikube.sigs.k8s.io/docs/start/
+
+
 Start minikube
 ```bash
 $ minikube start
