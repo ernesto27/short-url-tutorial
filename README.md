@@ -25,5 +25,20 @@ https://github.com/ernesto27/short-url-tutorial/tree/cloud-PasS
 - Azure redis cache
 - Mysql Planet scale
 
+## Kubernetes cloud services 
+
+Branch:
+https://github.com/ernesto27/short-url-tutorial/tree/kubernetes
+
+### Services cloud
+- Digitial ocean kubernetes
+- Azure redis cache
+- Mysql Plante scale
+
+
+
+
+
+
 
 
