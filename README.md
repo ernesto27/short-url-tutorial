@@ -1,23 +1,16 @@
-# Short url - Cloud PasS version
+# Short url - Kubernetes version
 
 
 ## System achitecture
 ![Diagram](./system_architecture.png)
 
 ### Backend
-The backend application is running on the azure PasS service called 
-App service.
+The backend application is running on the digital ocean kubernetes service.
 
-https://azure.microsoft.com/en-us/products/app-service
+https://www.digitalocean.com/products/kubernetes
 
-This service is a managed service that allows to run a web application without the need to manage the underlying infrastructure, it have a lot of features like autoscaling, monitoring, backup, etc.
+This allow to have a mananaged kubernetes cluster without worrying too much about updates and hardware failures.
 
-You only have to select a runtime or a docker setup and upload your code, 
-using the azure cli config.
-
-https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
-
-In this case we use the golang runtime.
 
 ### Database
 We use the Mysql serverless service  Planet scale.
@@ -44,7 +37,7 @@ This job runs on every commit, execute a static analysis check and tests.
 
 
 **build-deploy.yml**
-This job runs only when a new tag is created, it builds a docker image, push to docker hub and connect to a VM via ssh in order to run the lastest version of the service
+This job runs only when a new tag is created, it builds a docker image, push to docker hub and deploy to digital ocean kubernetes
 
 ---
 
@@ -137,12 +130,6 @@ Get short url
 $ curl -X GET http://localhost:8080/hash-url
 ```
 --- 
-
-## Deploy to azure web services using azure cli
-You need to install azure cli and login to your account before run this command.
-```bash
-$ ./scripts/deployAzure.sh
-```
 
 
 
