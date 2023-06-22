@@ -4,8 +4,7 @@ This is a repository that have differentes approach to create a short-url servic
 
 ## Monolithic
 
-Branch: 
-https://github.com/ernesto27/short-url-tutorial/tree/first-version
+Branch: https://github.com/ernesto27/short-url-tutorial/tree/monolithic
 
 ### Services run on a single VM
 - nginx 
